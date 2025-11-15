@@ -1,4 +1,4 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -475,8 +475,7 @@
       box-shadow: 0 10px 40px rgba(0,0,0,0.7);
     }
     .pp-close {
-      position: absolute; top: 18px; right: 18px;
-      background: transparent; border: 0; color: #fff;
+      position: absolute; top: 18px; right: 18px; background: transparent; border: 0; color: #fff;
       font-size: 20px; cursor: pointer; z-index: 2100;
     }
     .pp-close:focus { outline: none; }
@@ -616,6 +615,65 @@
       }
     }
 
+    /* MOBILE: keep nav visible, make it scrollable, adjust profile pic and avoid overlap */
+    @media (max-width: 980px) {
+      /* make header a slight overlay so nav text is readable over hero image */
+      header {
+        padding: 10px 16px;
+        background: rgba(0,0,0,0.45) !important;
+      }
+
+      /* show nav as a horizontal scrollable row (prevents hiding/clipping) */
+      nav {
+        display: flex !important;
+        gap: 12px;
+        align-items: center;
+        justify-content: center;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 6px 0;
+        margin: 0 auto;
+      }
+      nav::-webkit-scrollbar { height: 6px; }
+      nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 6px; }
+
+      /* make nav links comfortable tappable targets */
+      nav a {
+        white-space: nowrap;
+        padding: 8px 10px;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* ensure header does not hide page content (approx header height) */
+      body { padding-top: calc( (10px * 2) + 48px ); } /* header vertical padding + expected header content height */
+
+      /* push hero content down a bit to avoid overlap with fixed header */
+      .hero-container { padding-top: 80px; }
+
+      /* reposition & reduce profile pic so it doesn't stick to the very top */
+      .profile-pic {
+        left: 16px;
+        top: 12px;
+        transform: none; /* remove translateY to place it at a fixed top offset */
+      }
+      .profile-pic img {
+        width: 48px;
+        height: 48px;
+        border-width: 2px;
+      }
+    }
+
+    /* extra tiny adjustments for very small screens */
+    @media (max-width: 480px) {
+      nav a { font-size: 14px; padding: 7px 9px; }
+      .profile-pic { left: 12px; top: 10px; }
+      .profile-pic img { width: 44px; height: 44px; }
+      .hero-container { padding-top: 90px; }
+    }
+
   </style>
 </head>
 <body>
@@ -625,7 +683,7 @@
   <header>
     <div class="profile-pic"><img id="profilePic" src="Sasi.jpg" alt="Profile picture" /></div>
     <nav>
-      <a id="indexLink" href="index.html" >Home</a>
+      <a id="indexLink" href="landing.html" >Home</a>
       <a id="aboutLink" href="#experience">About</a>
       <a href="Resume1.pdf">Resume</a>
       <a id="contactLink" href="#contact">Contact</a>
@@ -878,7 +936,6 @@
                 <ul>
                     <li><strong>GitHub</strong> <a href="https://github.com/sasidhar-sys">@sasidhar-sys</a></li>
                     <li><strong>Email</strong> <a href="#">mailtosasi.official@gmail.com</a></li>
-					<li><strong>LinkedIn</strong> <a href="www.linkedin.com/in/sasidhar-arumugam-ba293b290">Sasidhar Aarumugam@LinkedIn</a></li>
                     <LI><STRONG>Location</STRONG> India</LI>
                 </ul>
             </div>
@@ -1290,7 +1347,3 @@
   </script>
 </body>
 </html>
-
-
-
-
